@@ -30,7 +30,17 @@ input,textarea,select,button{font-family:inherit}
 .nav-links{display:flex;gap:24px;font-size:15px;font-weight:600}
 .nav-links a{color:var(--text-secondary);transition:color .2s}
 .nav-links a:hover,.nav-links a.active{color:var(--accent)}
-#theme-toggle{background:none;border:none;cursor:pointer;font-size:20px;padding:8px;border-radius:8px}
+#theme-toggle{background:none;border:none;cursor:pointer;font-size:20px;padding:10px;border-radius:8px;line-height:1}
+#menu-toggle{display:none;flex-direction:column;gap:5px;width:32px;height:32px;justify-content:center;align-items:center;background:none;border:none;cursor:pointer;padding:8px}
+#menu-toggle span{display:block;width:20px;height:2px;background:var(--text-primary);transition:all .3s}
+#menu-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+#menu-toggle.active span:nth-child(2){opacity:0}
+#menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+#mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:var(--bg-secondary);border-bottom:1px solid var(--border-color);z-index:499;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+#mobile-menu.show{display:block}
+#mobile-menu a{display:block;padding:16px 8%;font-size:16px;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border-color)}
+#mobile-menu a:last-child{border-bottom:none}
+#mobile-menu a:hover,#mobile-menu a.active{color:var(--accent);background:var(--bg-primary)}
 
 /* Page Hero */
 .page-hero{min-height:280px;background:linear-gradient(-45deg,#1e1b4b,#312e81,#1e3a5f,#0f172a);background-size:400% 400%;animation:gradShift 14s ease infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 6% 60px;position:relative}
@@ -60,6 +70,7 @@ footer a:hover{color:var(--accent)}
 
 @media(max-width:600px){
 .nav-links{display:none}
+#menu-toggle{display:flex}
 }
 </style>
 <link rel="preload" href="/css/shared.min.css" as="style" onload="this.rel='stylesheet'">
@@ -80,8 +91,17 @@ footer a:hover{color:var(--accent)}
 <a href="/contact">Contact</a>
 <a href="/privacy" class="active">Privacy</a>
 </div>
+<div class="nav-buttons" style="display:flex;align-items:center;gap:4px">
+<button id="menu-toggle" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 <button id="theme-toggle" onclick="localStorage.setItem('theme',localStorage.getItem('theme')==='dark'?'light':'dark');location.reload()" aria-label="Toggle theme">🌙</button>
+</div>
 </nav>
+<div id="mobile-menu">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+</div>
 
 <div class="page-hero">
 <h1>Privacy Policy</h1>
@@ -172,5 +192,6 @@ footer a:hover{color:var(--accent)}
 <a href="/privacy">Privacy</a>
 <p style="margin-top:16px">© 2026 Qnaxia. All rights reserved.</p>
 </footer>
+<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('show');document.getElementById('menu-toggle').classList.toggle('active');}</script>
 </body>
 </html>

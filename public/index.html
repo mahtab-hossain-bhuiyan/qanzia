@@ -21,10 +21,31 @@ input,textarea,select,button{font-family:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
 /* Nav */
-#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:72px;display:flex;align-items:center;padding:0 8%;transition:all .35s;background:var(--bg-primary)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 8%;transition:all .35s;background:var(--bg-primary)}
 #nav.solid{background:var(--bg-secondary);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(0,0,0,.06)}
 .nav-logo{font-size:24px;font-weight:800;letter-spacing:-0.5px;transition:color .3s;color:var(--text-primary)}
 .nav-logo em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:24px;font-size:15px;font-weight:600}
+.nav-links a{color:var(--text-secondary);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-buttons{display:flex;align-items:center;gap:4px}
+#theme-toggle,#menu-toggle{background:none;border:none;cursor:pointer;font-size:20px;padding:10px;border-radius:8px;color:var(--text-primary);line-height:1}
+#menu-toggle{display:none;flex-direction:column;gap:5px;width:32px;height:32px;justify-content:center;align-items:center}
+#menu-toggle span{display:block;width:20px;height:2px;background:var(--text-primary);transition:all .3s}
+#menu-toggle.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+#menu-toggle.active span:nth-child(2){opacity:0}
+#menu-toggle.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+#mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;background:var(--bg-secondary);border-bottom:1px solid var(--border-color);z-index:499;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+#mobile-menu.show{display:block}
+#mobile-menu a{display:block;padding:16px 8%;font-size:16px;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border-color)}
+#mobile-menu a:last-child{border-bottom:none}
+#mobile-menu a:hover,#mobile-menu a.active{color:var(--accent);background:var(--bg-primary)}
+
+@media(max-width:600px){
+.nav-links{display:none}
+#menu-toggle{display:flex}
+}
 
 /* Toast */
 #toast-box{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
@@ -38,8 +59,10 @@ input,textarea,select,button{font-family:inherit}
 #ck span{flex:1;font-size:14px;color:#E5E7EB}
 
 /* Footer */
-footer{background:var(--bg-primary);color:var(--text-secondary);text-align:center;padding:48px 5%;margin-top:64px}
+footer{background:var(--bg-primary);color:var(--text-secondary);text-align:center;padding:48px 5%;margin-top:64px;border-top:1px solid var(--border-color)}
 footer strong{color:var(--text-primary);display:block;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px}
+footer a{color:var(--text-secondary);margin:0 12px}
+footer a:hover{color:var(--accent)}
 </style>
 <link rel="preload" href="/css/shared.min.css" as="style" onload="this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="/css/shared.min.css"></noscript>
@@ -53,8 +76,23 @@ footer strong{color:var(--text-primary);display:block;font-size:22px;font-weight
 </div>
 <nav id="nav">
 <a href="/" class="nav-logo" id="logo">Qn<em>axia</em></a>
-<button id="theme-toggle" onclick="toggleTheme()" style="background:none;border:none;cursor:pointer;font-size:20px;padding:8px;border-radius:8px;color:var(--text-primary)">🌙</button>
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+</div>
+<div class="nav-buttons">
+<button id="menu-toggle" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+<button id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+</div>
 </nav>
+<div id="mobile-menu">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+</div>
 <div id="app"></div>
 
 <script>
@@ -69,6 +107,7 @@ var t=localStorage.getItem('theme');
 if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('theme-toggle').textContent='☀️';}
 if(!sessionStorage.getItem('ck')){document.getElementById('ck').style.display='flex';}
 })();
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('show');document.getElementById('menu-toggle').classList.toggle('active');}
 </script>
 </body>
 </html>
