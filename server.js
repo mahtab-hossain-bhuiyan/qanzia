@@ -36,11 +36,39 @@ fastify.register(require('@fastify/cors'), {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 });
 fastify.register(require('@fastify/multipart'), { limits: { fileSize: 5 * 1024 * 1024 } });
+
+// ── Compression ─────────────────────────────────────────────
+fastify.register(require('@fastify/compress'), {
+  threshold: 1024,
+  brotli: { quality: 5 }
+});
+
+// ── Static: CSS/JS/Assets (Long Cache) ───────────────────
 fastify.register(require('@fastify/static'), {
   root: path.join(__dirname, 'public'),
   prefix: '/',
   decorateReply: false,
-  cacheControl: 'max-age=3600, s-maxage=3600',
+  cacheControl: 'public, max-age=31536000, immutable',
+  allowedPath: (pathname) => {
+    return pathname.endsWith('.css') || pathname.endsWith('.js') ||
+           pathname.startsWith('/assets/') || pathname.endsWith('.js.map');
+  }
+});
+
+// ── Static: HTML Pages (Short Cache) ───────────────────
+fastify.register(require('@fastify/static'), {
+  root: path.join(__dirname, 'public'),
+  prefix: '/',
+  decorateReply: false,
+  cacheControl: 'public, max-age=300, must-revalidate',
+  allowedPath: (pathname) => {
+    return pathname.endsWith('.html') && !pathname.includes('index.html');
+  },
+  setHeaders: (res, pathname) => {
+    if (pathname.endsWith('.html')) {
+      res.setHeader('Vary', 'Accept-Encoding');
+    }
+  }
 });
 
 // ── Auth helpers ─────────────────────────────────────────────
@@ -69,7 +97,7 @@ function requireAdmin(req, reply) {
   return false;
 }
 
-// ── Auto-publish scheduled posts ─────────────────────────
+// ── Auto-publish scheduled posts ───────��─────────────────
 async function publishDue() {
   await db.query(`
     UPDATE posts
@@ -80,9 +108,6 @@ async function publishDue() {
 setInterval(publishDue, 60 * 1000); // check every minute
 
 // ═══════════════════════════════════════════════════════
-// Rate limiting storage (DISABLED for now)
-// const loginAttempts = new Map();
-
 // PUBLIC ROUTES
 // ═══════════════════════════════════════════════════════
 
@@ -148,20 +173,66 @@ fastify.get('/api/posts/:slug', async (req, reply) => {
   return rows[0];
 });
 
-// GET /sitemap.xml — auto-generated sitemap
+// EXPLICIT STATIC PAGE ROUTES (for AdSense) ─────────────────────
+fastify.get('/about', async (req, reply) => {
+  reply.header('Cache-Control', 'public, max-age=300, must-revalidate');
+  reply.header('Vary', 'Accept-Encoding');
+  return reply.sendFile('about.html');
+});
+
+fastify.get('/contact', async (req, reply) => {
+  reply.header('Cache-Control', 'public, max-age=300, must-revalidate');
+  reply.header('Vary', 'Accept-Encoding');
+  return reply.sendFile('contact.html');
+});
+
+fastify.get('/privacy', async (req, reply) => {
+  reply.header('Cache-Control', 'public, max-age=300, must-revalidate');
+  reply.header('Vary', 'Accept-Encoding');
+  return reply.sendFile('privacy.html');
+});
+
+// ROBOTS.TXT ───────────────────────────────────────────────
+fastify.get('/robots.txt', async (req, reply) => {
+  reply.header('Content-Type', 'text/plain');
+  reply.header('Cache-Control', 'public, max-age=86400, must-revalidate');
+  return `User-agent: *
+Allow: /
+
+Sitemap: https://qnaxia.com/sitemap.xml
+`;
+});
+
+// HEALTHZ ───────────────────────────────────────────────────
+fastify.get('/healthz', async (req, reply) => {
+  reply.header('Cache-Control', 'no-cache');
+  return { status: 'ok', timestamp: new Date().toISOString() };
+});
+
+// SITEMAP.XML (updated with static pages) ─────────────────
 fastify.get('/sitemap.xml', async (req, reply) => {
   const { rows } = await db.query(
     `SELECT slug, updated_at FROM posts WHERE status = 'published' ORDER BY updated_at DESC`
   );
+
+  // Static pages for AdSense
+  const staticUrls = [
+    `  <url><loc>https://qnaxia.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`,
+    `  <url><loc>https://qnaxia.com/contact</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`,
+    `  <url><loc>https://qnaxia.com/privacy</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`
+  ].join('\n');
+
   const urls = rows.map(r =>
     `  <url><loc>https://qnaxia.com/post/${r.slug}</loc>` +
     `<lastmod>${new Date(r.updated_at).toISOString().split('T')[0]}</lastmod>` +
     `<changefreq>weekly</changefreq><priority>0.8</priority></url>`
   ).join('\n');
+
   reply.header('Content-Type', 'application/xml');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://qnaxia.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
+${staticUrls}
 ${urls}
 </urlset>`;
 });
@@ -251,9 +322,18 @@ fastify.post('/api/upload', async (req, reply) => {
   return { url: `${process.env.SPACES_CDN}/${key}` };
 });
 
-// ── Catch-all: serve index.html for SPA routing ──────────
+// ── SPA Fallback: serve index.html ─────────────────────────────────────
+// CRITICAL FIX: Don't respond with index.html for /api/* requests
 fastify.setNotFoundHandler((req, reply) => {
-  reply.sendFile('index.html');
+  const path = req.url;
+
+  // /api/* routes should return 404 JSON
+  if (path.startsWith('/api/')) {
+    return reply.code(404).send({ error: 'Not found' });
+  }
+
+  // Everything else → SPA
+  return reply.sendFile('index.html');
 });
 
 // ── Start ────────────────────────────────────────────────

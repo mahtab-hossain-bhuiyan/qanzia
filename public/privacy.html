@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — Qnaxia</title>
+<meta name="description" content="Qnaxia Privacy Policy — Learn how we collect, use, and protect your data. Includes Google AdSense disclosure and cookie opt-out information.">
+<link rel="canonical" href="https://qnaxia.com/privacy">
+<meta property="og:site_name" content="Qnaxia">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy — Qnaxia">
+<meta property="og:description" content="Qnaxia Privacy Policy — Learn how we collect, use, and protect your data.">
+<meta property="og:url" content="https://qnaxia.com/privacy">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary)}
+:root{--bg-primary:#FAFBFC;--bg-secondary:#fff;--text-primary:#1F2937;--text-secondary:#6B7280;--accent:#0D9488;border-color:#E5E7EB}
+[data-theme="dark"]{--bg-primary:#0f172a;--bg-secondary:#1e293b;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--accent:#5EEAD4;border-color:#334155}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+input,textarea,select,button{font-family:inherit}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* Critical: Nav */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 8%;background:var(--bg-primary);border-bottom:1px solid var(--border-color)}
+.nav-logo{font-size:24px;font-weight:800;letter-spacing:-0.5px;color:var(--text-primary)}
+.nav-logo em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:24px;font-size:15px;font-weight:600}
+.nav-links a{color:var(--text-secondary);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+#theme-toggle{background:none;border:none;cursor:pointer;font-size:20px;padding:8px;border-radius:8px}
+
+/* Page Hero */
+.page-hero{min-height:280px;background:linear-gradient(-45deg,#1e1b4b,#312e81,#1e3a5f,#0f172a);background-size:400% 400%;animation:gradShift 14s ease infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 6% 60px;position:relative}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(13,148,136,.2) 0%,transparent 70%)}
+.page-hero h1{position:relative;z-index:1;font-size:clamp(36px,5vw,56px);font-weight:800;color:#fff;letter-spacing:-1.5px}
+.page-hero p{position:relative;z-index:1;font-size:clamp(15px,1.5vw,18px);color:#93C5FD;margin-top:16px;max-width:600px}
+
+/* Content */
+.main{max-width:900px;margin:0 auto;padding:64px 5%}
+.main h2{font-size:24px;font-weight:800;margin:48px 0 20px;color:var(--text-primary)}
+.main h2:first-child{margin-top:0}
+.main p{font-size:17px;line-height:1.85;color:var(--text-secondary);margin-bottom:24px}
+.main ul{list-style:none;margin-bottom:24px}
+.main li{font-size:17px;line-height:1.85;color:var(--text-secondary);margin-bottom:12px;padding-left:28px;position:relative}
+.main li::before{content:'•';position:absolute;left:8px;color:var(--accent);font-weight:700}
+
+/* Highlight Box */
+.alert{background:rgba(13,148,136,0.1);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:20px 24px;margin:32px 0}
+.alert-title{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.alert p{font-size:15px;line-height:1.7;color:var(--text-primary);margin:0}
+
+/* Footer */
+footer{background:var(--bg-primary);color:var(--text-secondary);text-align:center;padding:48px 5%;margin-top:64px;border-top:1px solid var(--border-color)}
+footer strong{color:var(--text-primary);display:block;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px}
+footer a{color:var(--text-secondary);margin:0 12px}
+footer a:hover{color:var(--accent)}
+
+@media(max-width:600px){
+.nav-links{display:none}
+}
+</style>
+<link rel="preload" href="/css/shared.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css/shared.min.css"></noscript>
+<script>
+(function(){
+  var t=localStorage.getItem('theme');
+  if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.write('<style>body{display:none}</style>');document.documentElement.style.display='none';}
+})();
+</script>
+</head>
+<body>
+<nav id="nav">
+<a href="/" class="nav-logo">Qn<em>axia</em></a>
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy" class="active">Privacy</a>
+</div>
+<button id="theme-toggle" onclick="localStorage.setItem('theme',localStorage.getItem('theme')==='dark'?'light':'dark');location.reload()" aria-label="Toggle theme">🌙</button>
+</nav>
+
+<div class="page-hero">
+<h1>Privacy Policy</h1>
+<p>How we protect your data</p>
+</div>
+
+<main class="main">
+<p>At Qnaxia, we take your privacy seriously. This policy explains what information we collect, how we use it, and your choices regarding your data.</p>
+
+<h2>Information We Collect</h2>
+<ul>
+<li>Basic usage data (pages visited, time spent on site)</li>
+<li>Device information (browser type, operating system)</li>
+<li>Cookies for session management and preferences</li>
+<li>Any information you voluntarily provide (email for newsletters)</li>
+</ul>
+
+<h2>How We Use Your Information</h2>
+<ul>
+<li>To improve our content and user experience</li>
+<li>To understand how visitors use our site</li>
+<li>To respond to your inquiries</li>
+<li>To comply with legal obligations</li>
+</ul>
+
+<h2>Cookies and Tracking</h2>
+<p>We use cookies to enhance your browsing experience. Cookies are small text files stored on your device that help remember your preferences and analyze site traffic.</p>
+
+<div class="alert">
+<div class="alert-title">Google AdSense and Third-Party Cookies</div>
+<p>Qnaxia displays Google AdSense ads served by Google. Google uses cookies to serve ads based on your visits to this and other sites. The DoubleClick DART cookie enables Google and its partners to serve ads based on your visit to our site and other sites. You can opt out of the DART cookie by visiting the <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ad Settings</a> page or by opting out of third-party vendor use of cookies through the <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener">Network Advertising Initiative opt-out page</a>.</p>
+</div>
+
+<h2>Third-Party Vendors</h2>
+<p>We may use third-party services such as Google Analytics and Google AdSense. These vendors may collect information about your visits to our site and other websites to provide relevant advertisements. These third-party vendors include:</p>
+<ul>
+<li>Google (AdSense, Analytics) — For ad delivery and traffic analysis</li>
+<li>Our hosting provider — For site functionality</li>
+</ul>
+
+<p>Each third-party vendor has its own privacy policy governing their data collection practices.</p>
+
+<h2>Your Choices</h2>
+<ul>
+<li>Browser settings to block or delete cookies</li>
+<li>Google Ad Settings to personalize ads</li>
+<li>Opt out of third-party cookies via <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener">NAI</a></li>
+<li>Clear your browser cookies at any time</li>
+</ul>
+
+<h2>GDPR Rights (EEA Users)</h2>
+<p>If you're located in the European Economic Area, you have the right to:</p>
+<ul>
+<li>Access your personal data</li>
+<li>Request correction or deletion of your data</li>
+<li>Object to processing of your data</li>
+<li>Request data portability</li>
+<li>Withdraw consent at any time</li>
+</ul>
+
+<h2>CCPA Rights (California Users)</h2>
+<p>California residents have the right to:</p>
+<ul>
+<li>Know what personal information we collect</li>
+<li>Request deletion of your personal information</li>
+<li>Opt out of sale of your personal information</li>
+<li>Non-discrimination for exercising your rights</li>
+</ul>
+
+<h2>Data Security</h2>
+<p>We implement appropriate security measures to protect your personal information. However, no method of transmission over the internet is 100% secure. We cannot guarantee absolute security.</p>
+
+<h2>Children's Privacy</h2>
+<p>Our site is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
+
+<h2>Changes to This Policy</h2>
+<p>We may update this policy from time to time. We will post any changes on this page and update the effective date.</p>
+
+<p style="margin-bottom:0"><strong>Last Updated:</strong> May 10, 2026</p>
+
+<p style="margin-top:32px">For questions about this policy, contact us at <a href="mailto:contact@qnaxia.com">contact@qnaxia.com</a>.</p>
+
+<footer>
+<strong>Qnaxia</strong>
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+<p style="margin-top:16px">© 2026 Qnaxia. All rights reserved.</p>
+</footer>
+</body>
+</html>

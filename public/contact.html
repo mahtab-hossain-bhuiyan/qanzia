@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact — Qnaxia</title>
+<meta name="description" content="Get in touch with Qnaxia. We'd love to hear from you — questions, feedback, or partnership inquiries welcome.">
+<link rel="canonical" href="https://qnaxia.com/contact">
+<meta property="og:site_name" content="Qnaxia">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — Qnaxia">
+<meta property="og:description" content="Get in touch with Qnaxia. We'd love to hear from you.">
+<meta property="og:url" content="https://qnaxia.com/contact">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary)}
+:root{--bg-primary:#FAFBFC;--bg-secondary:#fff;--text-primary:#1F2937;--text-secondary:#6B7280;--accent:#0D9488;border-color:#E5E7EB}
+[data-theme="dark"]{--bg-primary:#0f172a;--bg-secondary:#1e293b;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--accent:#5EEAD4;border-color:#334155}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+input,textarea,select,button{font-family:inherit}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+
+/* Critical: Nav */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 8%;background:var(--bg-primary);border-bottom:1px solid var(--border-color)}
+.nav-logo{font-size:24px;font-weight:800;letter-spacing:-0.5px;color:var(--text-primary)}
+.nav-logo em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;gap:24px;font-size:15px;font-weight:600}
+.nav-links a{color:var(--text-secondary);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+#theme-toggle{background:none;border:none;cursor:pointer;font-size:20px;padding:8px;border-radius:8px}
+
+/* Page Hero */
+.page-hero{min-height:280px;background:linear-gradient(-45deg,#1e1b4b,#312e81,#1e3a5f,#0f172a);background-size:400% 400%;animation:gradShift 14s ease infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 6% 60px;position:relative}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(13,148,136,.2) 0%,transparent 70%)}
+.page-hero h1{position:relative;z-index:1;font-size:clamp(36px,5vw,56px);font-weight:800;color:#fff;letter-spacing:-1.5px}
+.page-hero p{position:relative;z-index:1;font-size:clamp(15px,1.5vw,18px);color:#93C5FD;margin-top:16px;max-width:600px}
+
+/* Content */
+.main{max-width:800px;margin:0 auto;padding:64px 5%}
+.main p{font-size:17px;line-height:1.85;color:var(--text-secondary);margin-bottom:24px}
+.main h2{font-size:24px;font-weight:800;margin:48px 0 20px;color:var(--text-primary)}
+.main h2:first-child{margin-top:0}
+
+/* Contact Card */
+.contact-card{background:var(--bg-secondary);border-radius:20px;padding:40px;margin-top:32px;border:1px solid var(--border-color)}
+.contact-row{margin-bottom:24px}
+.contact-row:last-child{margin-bottom:0}
+.contact-label{display:block;font-size:13px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.contact-value{font-size:17px;color:var(--text-primary)}
+.contact-value a{color:var(--accent);text-decoration:underline}
+.contact-value a:hover{text-decoration:none}
+
+/* Info List */
+.info-list{display:flex;flex-wrap:wrap;gap:32px;margin-top:32px}
+.info-item{background:var(--bg-secondary);border-radius:16px;padding:24px;flex:1;min-width:200px;border:1px solid var(--border-color)}
+.info-icon{font-size:28px;margin-bottom:12px}
+.info-title{font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+.info-desc{font-size:14px;color:var(--text-secondary)}
+
+/* Footer */
+footer{background:var(--bg-primary);color:var(--text-secondary);text-align:center;padding:48px 5%;margin-top:64px;border-top:1px solid var(--border-color)}
+footer strong{color:var(--text-primary);display:block;font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px}
+footer a{color:var(--text-secondary);margin:0 12px}
+footer a:hover{color:var(--accent)}
+
+@media(max-width:600px){
+.nav-links{display:none}
+.info-list{flex-direction:column}
+}
+</style>
+<link rel="preload" href="/css/shared.min.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/css/shared.min.css"></noscript>
+<script>
+(function(){
+  var t=localStorage.getItem('theme');
+  if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.write('<style>body{display:none}</style>');document.documentElement.style.display='none';}
+})();
+</script>
+</head>
+<body>
+<nav id="nav">
+<a href="/" class="nav-logo">Qn<em>axia</em></a>
+<div class="nav-links">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact" class="active">Contact</a>
+<a href="/privacy">Privacy</a>
+</div>
+<button id="theme-toggle" onclick="localStorage.setItem('theme',localStorage.getItem('theme')==='dark'?'light':'dark');location.reload()" aria-label="Toggle theme">🌙</button>
+</nav>
+
+<div class="page-hero">
+<h1>Contact Us</h1>
+<p>We'd love to hear from you</p>
+</div>
+
+<main class="main">
+<p>Have a question, suggestion, or just want to say hello? We're here to help. Our team responds to all inquiries within 24-48 hours during business days.</p>
+
+<div class="contact-card">
+<div class="contact-row">
+<span class="contact-label">Email</span>
+<span class="contact-value"><a href="mailto:contact@qnaxia.com">contact@qnaxia.com</a></span>
+</div>
+<div class="contact-row">
+<span class="contact-label">Response Time</span>
+<span class="contact-value">We typically respond within 24-48 hours</span>
+</div>
+<div class="contact-row">
+<span class="contact-label">Business Hours</span>
+<span class="contact-value">Monday – Friday, 9 AM – 6 PM EST</span>
+</div>
+</div>
+
+<h2>What You Can Contact Us About</h2>
+<p>We're happy to assist with a variety of topics:</p>
+
+<div class="info-list">
+<div class="info-item">
+<div class="info-icon">✍️</div>
+<div class="info-title">Content Inquiries</div>
+<div class="info-desc">Suggestions for topics or guest writing opportunities</div>
+</div>
+<div class="info-item">
+<div class="info-icon">🐛</div>
+<div class="info-title">Bug Reports</div>
+<div class="info-desc">Issues with site functionality or display</div>
+</div>
+<div class="info-item">
+<div class="info-icon">🤝</div>
+<div class="info-title">Partnerships</div>
+<div class="info-desc">Business inquiries or collaborations</div>
+</div>
+</div>
+
+<p style="margin-top:32px">For fastest response, please include as much detail as possible in your message. Thank you for your interest in Qnaxia!</p>
+
+<footer>
+<strong>Qnaxia</strong>
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/contact">Contact</a>
+<a href="/privacy">Privacy</a>
+<p style="margin-top:16px">© 2026 Qnaxia. All rights reserved.</p>
+</footer>
+</body>
+</html>
