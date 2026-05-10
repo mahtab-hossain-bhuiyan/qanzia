@@ -15,8 +15,8 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-primary);color:var(--text-primary)}
-:root{--bg-primary:#FAFBFC;--bg-secondary:#fff;--text-primary:#1F2937;--text-secondary:#6B7280;--accent:#0D9488;border-color:#E5E7EB}
-[data-theme="dark"]{--bg-primary:#0f172a;--bg-secondary:#1e293b;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--accent:#5EEAD4;border-color:#334155}
+:root{--bg-primary:#FAFBFC;--bg-secondary:#fff;--text-primary:#1F2937;--text-secondary:#6B7280;--accent:#0D9488;--border-color:#E5E7EB}
+[data-theme="dark"]{--bg-primary:#0f172a;--bg-secondary:#1e293b;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--accent:#5EEAD4;--border-color:#334155}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 input,textarea,select,button{font-family:inherit}
@@ -62,7 +62,7 @@ footer a:hover{color:var(--accent)}
 <script>
 (function(){
   var t=localStorage.getItem('theme');
-  if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.write('<style>body{display:none}</style>');document.documentElement.style.display='none';}
+  if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');}
 })();
 </script>
 </head>
